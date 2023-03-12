@@ -2,7 +2,7 @@ import { Formik, Form, Field } from 'formik';
 import * as yup from 'yup';
 import PropTypes from 'prop-types';
 
-export default function Input({ onFormData }) {
+export default function ContactForm({ onFormData }) {
   function handleSubmit(values, { resetForm }) {
     onFormData(values);
     resetForm();
@@ -21,8 +21,6 @@ export default function Input({ onFormData }) {
 
   return (
     <div>
-      <h1>Phonebook</h1>
-
       {/* Form */}
       <Formik
         initialValues={initialValues}
@@ -47,6 +45,6 @@ export default function Input({ onFormData }) {
   );
 }
 
-Input.propTypes = {
+ContactForm.propTypes = {
   onFormData: PropTypes.func.isRequired,
 };

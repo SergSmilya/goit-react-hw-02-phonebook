@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 
-import Filter from 'components/Filter/Filter';
+// import Filter from 'components/Filter/Filter';
 
-export default function Contacts({
-  contacts,
-  onFilterControl,
-  onDeleteContact,
-}) {
+export default function Contacts({ contacts, onDeleteContact }) {
   return (
     <div>
-      <h2>Contacts</h2>
-      <Filter onFilterControl={onFilterControl} />
+      {/* <Filter onFilterControl={onFilterControl} /> */}
       <ul>
         {contacts.map(({ id, name, number }) => (
           <li key={id}>

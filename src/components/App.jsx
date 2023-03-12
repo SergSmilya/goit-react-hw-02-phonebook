@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import Contacts from './Contacts/Contacts';
-import Input from './Input/Input';
+import ContactForm from './ContactForm/ContactForm';
 import { nanoid } from 'nanoid';
+import Filter from './Filter/Filter';
 
 export default class App extends Component {
   state = {
@@ -19,8 +20,8 @@ export default class App extends Component {
     const dataNameLowerCase = data.name.toLowerCase().trim();
 
     if (
-      this.state.contacts.find(el =>
-        dataNameLowerCase.includes(el.name.toLowerCase().trim())
+      this.state.contacts.find(
+        el => dataNameLowerCase === el.name.toLowerCase().trim()
       )
     ) {
       alert(`Contact was added`);
@@ -42,9 +43,13 @@ export default class App extends Component {
   onFilterSearch = () => {
     const { contacts, filter } = this.state;
 
-    return contacts
-      .map(contact => contact.name.toLowerCase().includes(filter) && contact)
-      .filter(contact => contact !== false);
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter)
+    );
+
+    // return contacts
+    //   .map(contact => contact.name.toLowerCase().includes(filter) && contact)
+    //   .filter(contact => contact !== false);
   };
 
   onDeleteContact = contactId => {
@@ -58,17 +63,18 @@ export default class App extends Component {
       <div
         style={{
           height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: 'block',
           fontSize: 20,
           color: '#010101',
         }}
       >
-        <Input onFormData={this.onFormData} />
+        <h1>Phonebook</h1>
+        <ContactForm onFormData={this.onFormData} />
+
+        <h2>Contacts</h2>
+        <Filter onFilterControl={this.onFilterControl} />
         <Contacts
           contacts={this.onFilterSearch()}
-          onFilterControl={this.onFilterControl}
           onDeleteContact={this.onDeleteContact}
         />
       </div>
